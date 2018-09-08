@@ -1,0 +1,20 @@
+---
+title: "Discriminant analysis"
+output: html_notebook
+---
+
+The cases where some variables are continuous and some are discrete ar still in needs of further study. Computer's experiments shows that Fisher's linear discriminant function can perform poorly/well depending upon the correlations between the qualitative and continuous variables.
+
+"A low correlation in one population but a  high correlation in the other, or a change in the sign of the correlations between the two population could indicate conditions unfavorable to Fisher's linear discriminant function." [W. J. Krzanowski, The Performance of Fisher's Linear Discriminant Function Under Non-Optimal Condition](https://www.jstor.org/stable/pdf/1268629.pdf?casa_token=teJ4Tv9T6FoAAAAA:lYZwjEwLSh2N7UVMIDdYwgRYR26qdkYWAmm0QmVZWdXLAQHRuUX2823hanE6P5-Og0ps2YKbcSJLUhObk3kVnj44uQZ4cYoB_lAuW8Jmp0DAXq6VFXA)
+
+[A Cautionary Note on Selection of Variables in Discriminant Analysis](https://www.jstor.org/stable/pdf/2346964.pdf?casa_token=sxlZtgp2bzoAAAAA:ryEZfzUOUy3UkDj9d0WY6aGFyzQgmQG6wJSEmsAa9Ept-U9F8qlcEecwJyk-jfZ_sxg5GpyW4xzJmriXd2wsFAXUEmf_0NjHu7jSJclvNjcpmpa7_ws): there's no guarantee that the subset selected is "best", regardless of the criterion being used. Subsets that maximize the discriminatory power may perform poorly on future samples. This paper suggest split the sample into batches and determine the best subset for each batch.
+
+[An Inverse Matrix Adjustment Arising in Discriminant Analysis](https://projecteuclid.org/download/pdf_1/euclid.aoms/1177729698)
+
+[Pitfalls in the Application of Discriminant Analysis in Business, Finance, and Economics](https://www.jstor.org/stable/pdf/2326320.pdf?casa_token=2QNnzGu53R4AAAAA:Z--PlpRfnzworS3yT-0kFik5GYZ8NXcThOiTN33fHTbMvqEcepkEZYPBRl9qafX2x3Jka_UO814UWDffqMvKzs_aE7Z02O0_w7OO-KHyqnTGryH7xo8)
+
+[Selection of variables in discriminant analysis by F-statistic and error rate](https://www.jstor.org/stable/pdf/1267890.pdf?casa_token=1Co5RCUhO1EAAAAA:-Ti2ckPoMLyn7Cm5Lx18DCCw8MKf72pbWWknLC_O9yvL4oAUwqqC_QAyr0nQbJPnmxIHUhS8CvMdk2qXTVNNS7DkUGRfwVkp13awiL3-DKtaIn-MQf4)
+
+[Multivariate binary discrimination by the kernel method](https://www.jstor.org/stable/pdf/2335719.pdf?casa_token=snyFEP0K7h0AAAAA:8gFKjdhZpqNzQ1MPQV21v5e_hD46N4NnqYDiAkmNZOk83LC-bw4EgPdim09x7KE3QFJCAvqmW9KxMS_Z24rZhKoS-2Yt5HizDdrCuZQ05AyGe0EEPd0)
+
+[The detection of influential observations for allocation, separation, and the determination of probabilities in a Bayesian framework](https://www.jstor.org/stable/pdf/1391612.pdf?casa_token=V0T84n2lSU0AAAAA:eiNwUcxa1fza0BN-gJasIOZOKlTei8UQ5agaW9QYygzP38mSUw2lB0gu5UVQ_9CfAFRafS_T8UcXf7NsysSOmhibC76KV41AR9x8a3o9hxhXI33cgio)
