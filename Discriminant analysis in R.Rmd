@@ -25,7 +25,9 @@ Chạy LDA
 ```{r}
 # prior là prior probability mà ta chọn cho  mỗi nhóm. 
 # thông thường, ta chọn  prior probability của các nhóm là bằng nhau 
-re <- lda(formula = Species ~ ., data = iris, prior = c(1,1,1)/3)
+df = iris
+df$Species = as.factor(df$Species)
+re <- lda(formula = Species ~ ., data = df, prior = c(1,1,1)/3)
 re$counts
 re$lev
 #  group means.
@@ -38,17 +40,25 @@ re$svd
 
 ```{r}
 # using train-test split
-train_index = sample(1:nrow(iris), nrow(iris)*.75)
-r3 <- lda(Species ~ ., # training model
-         iris, 
-         prior = c(1,1,1)/3, 
-         subset = train_index)
-# predict
-test = iris[-train_index, ]
+train_index = sample(1:nrow(df), nrow(df)*.75)
+r3 <- lda(Species ~ .,df, prior = c(1,1,1)/3, subset = train_index)
+test = df[-train_index, ]
 pre = predict(object = r3, newdata = test)
 # classification result:
 pre$class
 # percentage of correct prediction
 sum(pre$class == test$Species)/nrow(test)
+```
+# scale
+```{r}
+scaled.iris = data.frame(cbind(scale(df[,1:4]),df$Species))
+scaled.iris$V5 <- as.factor(scaled.iris$V5)
+r3 <- lda(V5 ~ .,scaled.iris, prior = c(1,1,1)/3, subset = train_index)
+test = scaled.iris[-train_index, ]
+pre = predict(object = r3, newdata = test)
+# classification result:
+pre$class
+# percentage of correct prediction
+sum(pre$class == test$V5)/nrow(test)
 ```
 

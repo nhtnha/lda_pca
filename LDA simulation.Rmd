@@ -8,18 +8,15 @@ library(MASS)
 # LDA without PCA
 
 ```{r}
-x = mvrnorm(100,c(2,4),matrix(c(2,2,4,10),2,2))
+x = mvrnorm(100,c(2,7),matrix(c(20,2,4,10),2,2))
 y = mvrnorm(80,c(0,1),matrix(c(1,.7,.9,1),2,2))
-plot(x,col='green',ylim = range(x,y))
-par(new=TRUE)
-plot(y,ylim = range(x,y), axes = FALSE)
 x = cbind(x,rep(1,100))
 y = cbind(y,rep(0,80))
 z = rbind(x,y)
 colnames(z)<-c('dim1','dim2','gr')
 z = data.frame(z)
 z$gr <- as.factor(z$gr)
-head(z)
+z[1:2,]
 ```
 
 ```{r}
