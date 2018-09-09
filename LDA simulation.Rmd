@@ -1,0 +1,65 @@
+---
+title: "LDA simulation"
+output: html_notebook
+---
+```{r}
+library(MASS)
+```
+# LDA without PCA
+
+```{r}
+x = mvrnorm(100,c(2,4),matrix(c(2,2,4,10),2,2))
+y = mvrnorm(80,c(0,1),matrix(c(1,.7,.9,1),2,2))
+plot(x,col='green',ylim = range(x,y))
+par(new=TRUE)
+plot(y,ylim = range(x,y), axes = FALSE)
+x = cbind(x,rep(1,100))
+y = cbind(y,rep(0,80))
+z = rbind(x,y)
+colnames(z)<-c('dim1','dim2','gr')
+z = data.frame(z)
+z$gr <- as.factor(z$gr)
+head(z)
+```
+
+```{r}
+# using train-test split
+train_index = sample(1:nrow(z), nrow(z)*.75)
+r3 <- lda(gr  ~ .,z, prior = c(1,1)/2, subset = train_index)
+test = z[-train_index, ]
+pre = predict(object = r3, newdata = test)
+# classification result:
+pre$class
+# percentage of correct prediction
+sum(pre$class == test$gr)/nrow(test)
+```
+
+# LDA with PCA, without scaling PCA transformed data
+
+```{r}
+z.pca <- prcomp(z[,1:2],center = TRUE, scale. = TRUE) 
+summary(z.pca)
+pcad_data = predict(z.pca, newdata=z[,1:2])
+pcad_data = data.frame(cbind(pcad_data,z$gr))
+train_index = sample(1:nrow(pcad_data), nrow(pcad_data)*.75)
+r3 <- lda(V3  ~ .,pcad_data, prior = c(1,1)/2, subset = train_index)
+# predict
+test = pcad_data[-train_index, ]
+pre = predict(object = r3, newdata = test)
+# classification result:
+pre$class
+sum(pre$class == test$V3)/nrow(test)
+```
+# LDA with PCA, scaling PCA transformed data
+```{r}
+r.rescaled = cbind(scale(pcad_data[,1:2]),z$gr)
+pcad_data = data.frame(r.rescaled)
+r4 <- lda(V3  ~ .,pcad_data, prior = c(1,1)/2, subset = train_index)
+test2 = pcad_data[-train_index, ]
+pre2 = predict(object = r3, newdata = test)
+# classification result:
+pre2$class
+sum(pre2$class == test2$V3)/nrow(test)
+```
+
+

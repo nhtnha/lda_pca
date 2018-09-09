@@ -1,0 +1,44 @@
+---
+title: "PCA in R"
+output: html_notebook
+---
+Source: [Thiago G. Martins PCA](https://tgmstat.wordpress.com/2013/11/28/computing-and-visualizing-pca-in-r/#ref1)
+```{r}
+library(MASS)
+data("iris")
+names(iris)
+```
+```{r}
+# chuẩn hóa dữ liệu
+scaled = scale(iris[,1:4])
+cov(scaled)
+```
+Nhưng trong hàm prcomp thực ra đã có sẵn option center và scale giúp ta chuẩn hóa dữ liệup nên scale hồi nãy là cho vui :v
+
+Chú ý DEFAULT của hàm là FALSE.
+```{r}
+ir.pca <- prcomp(iris[,1:4],center = TRUE, scale. = TRUE) 
+plot(ir.pca, type = "l")
+```
+ 
+
+```{r}
+summary(ir.pca)
+pcad_data = predict(ir.pca, newdata=iris[,1:4])
+pcad_data= scale(pcad_data)
+pcad_data = data.frame(cbind(pcad_data,iris$Species))
+pcad_data[1:3,]
+```
+
+```{r}
+train_index = sample(1:nrow(pcad_data), nrow(pcad_data)*.75)
+r3 <- lda(V5  ~ .,pcad_data, prior = c(1,1,1)/3, subset = train_index)
+# predict
+test = pcad_data[-train_index, ]
+pre = predict(object = r3, newdata = test)
+# classification result:
+pre$class
+# percentage of correct prediction
+sum(pre$class == test$V5)/nrow(test)
+```
+
