@@ -1,5 +1,5 @@
 ---
-title: "Discriminant analysis in R"
+title: "Discriminant analysis trong R"
 output: html_notebook
 ---
 ```{r}
@@ -7,10 +7,9 @@ library(MASS)
 data("iris")
 head(iris)
 ```
-kiểm tra điều kiện để dùng  LDA (covariance  bằng nhau ).:
-Giả thuyết covariance bằng nhau lcó thể được  ác định qua các phép kieểm định 
-như Box-M, log-likelihood ratio,...trong 
-[philender: Hypothesis Testing: Equality of Population Covariance Matrices](http://www.philender.com/courses/multivariate/notes3/covar.html) hay [Visualizing Tests for Equality of Covariance Matrices](http://www.datavis.ca/papers/EqCov-rev2.pdf). Ta không kiểm nhưng sẽ thấy là LDA  khá hiêu quả trên  bộ dữ liệu này .Ta dùng 5-number summary để có một chút ý niệm về  giả thuyết covariance bằng nhau này 
+kiểm tra điều kiện để dùng LDA (covariance  bằng nhau ).:
+Giả thuyết covariance bằng nhau có thể được  xác định qua các phép kiểm định như Box-M, log-likelihood ratio,...trong 
+[philender: Hypothesis Testing: Equality of Population Covariance Matrices](http://www.philender.com/courses/multivariate/notes3/covar.html) hay [Visualizing Tests for Equality of Covariance Matrices](http://www.datavis.ca/papers/EqCov-rev2.pdf). Ta không kiểm nhưng sẽ thấy là LDA  khá hiêu quả trên  bộ dữ liệu này. Ta chỉ dùng 5-number summary để có một chút ý niệm về  giả thuyết covariance bằng nhau này 
 
 
 ```{r}
@@ -56,7 +55,7 @@ scaled.iris$V5 <- as.factor(scaled.iris$V5)
 r3 <- lda(V5 ~ .,scaled.iris, prior = c(1,1,1)/3, subset = train_index)
 test = scaled.iris[-train_index, ]
 pre = predict(object = r3, newdata = test)
-# classification result:
+# kết quả phân loại:
 pre$class
 # percentage of correct prediction
 sum(pre$class == test$V5)/nrow(test)
