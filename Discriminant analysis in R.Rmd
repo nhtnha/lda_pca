@@ -1,5 +1,5 @@
 ---
-title: "Discriminant analysis trong R"
+title: "Discriminant analysis"
 output: html_notebook
 ---
 ```{r}
@@ -8,7 +8,7 @@ data("iris")
 head(iris)
 ```
 kiểm tra điều kiện để dùng LDA (covariance  bằng nhau ).:
-Giả thuyết covariance bằng nhau có thể được  xác định qua các phép kiểm định như Box-M, log-likelihood ratio,...trong 
+Giả thuyết covariance bằng nhau có thể được xác định qua các phép kiểm định như Box-M, log-likelihood ratio,...trong 
 [philender: Hypothesis Testing: Equality of Population Covariance Matrices](http://www.philender.com/courses/multivariate/notes3/covar.html) hay [Visualizing Tests for Equality of Covariance Matrices](http://www.datavis.ca/papers/EqCov-rev2.pdf). Ta không kiểm nhưng sẽ thấy là LDA  khá hiêu quả trên  bộ dữ liệu này. Ta chỉ dùng 5-number summary để có một chút ý niệm về  giả thuyết covariance bằng nhau này 
 
 
@@ -23,8 +23,10 @@ summary(as.vector(c3))
 Chạy LDA:
 
 **prior** là prior probability mà ta chọn cho  mỗi nhóm. 
-**chú ý là LDA khá nhạy cảm với prior mà ta chọn**
-Ta chọn  prior probability của các nhóm là bằng nhau. Bạn có thể thử thay đổi các giá trị của prior nhiều lần để cảm nhận thử nó nhạy cảm cỡ nào
+
+**Chú ý là LDA khá nhạy cảm với prior mà ta chọn. Nếu ta không chỉ định prior trong hàm lda thì R mặc định là class proportions dựa trên training set**
+
+Ta chọn  prior probability của các nhóm là bằng nhau. Bạn có thể thử thay đổi các giá trị của prior nhiều lần để cảm nhận thử nó nhạy cảm cỡ nào. 
 
 ```{r}
 df = iris
